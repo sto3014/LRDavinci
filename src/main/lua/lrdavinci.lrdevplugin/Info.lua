@@ -15,18 +15,19 @@ return {
 	},
 	LrLibraryMenuItems = {
 		{
-			title = LOC "$$$/Davinci/Menu/Library/GetID=Get IDs from current timeline",
-			file = "GetCurrentTimelineID.lua",
-		},
-		{
 			title = LOC "$$$/Davinci/Menu/Library/EditInDR=Edit in Davinci Resolve…",
 			file = "EditInDavinciResolve.lua",
+			enabledWhen = "videosSelected",
+		},
+		{
+			title = LOC "$$$/Davinci/Menu/Library/GetID=Sync IDs from Davinci Resolve",
+			file = "GetCurrentTimelineID.lua",
+			enabledWhen = "videosSelected",
 		},
 	},
 
 	LrInitPlugin = "InitPlugin.lua",
-	LrPluginInfoProvider = "InfoProvider.lua",
-	
+
 	VERSION = { major=1, minor=0, revision=0, build=0, },
 
 }

@@ -3,17 +3,10 @@ SearchLastModified.lua
 ------------------------------------------------------------------------------]]
 -- Access the Lightroom SDK namespaces.
 local LrFunctionContext = import 'LrFunctionContext'
-local LrBinding = import 'LrBinding'
 local LrDialogs = import 'LrDialogs'
-local LrView = import 'LrView'
-local LrLogger = import 'LrLogger'
 local LrApplication = import 'LrApplication'
-local LrProgressScope = import("LrProgressScope")
-local LrPrefs = import("LrPrefs")
 local LrTasks = import 'LrTasks'
-
-
-
+local LrProgressScope = import 'LrProgressScope'
 
 -- Logger
 local logger = require("Logger")
@@ -41,7 +34,10 @@ Async task
 -----------------------------------------------------------------------------]]
 function TaskFunc(context)
     logger.trace("TaskFunc")
-
+    local Progress = LrProgressScope({
+        title = LOC "$$$/LRDavinci/Progress/SetTimeline=Set timeline in Davinci Resolve",
+        functionContext = context
+    })
     local activeCatalog = LrApplication.activeCatalog()
     local photo = activeCatalog:getTargetPhoto()
     local result
@@ -54,16 +50,16 @@ function TaskFunc(context)
     local timeline = (photo:getPropertyForPlugin(PluginInit.pluginID, 'DavinciTimeline'))
     local database = (photo:getPropertyForPlugin(PluginInit.pluginID, 'DavinciDatabase'))
     if ( not project or not timeline) then
-        LrDialogs.message(LOC("$$$/LRDavinci/Error/NoProjectOrTimeline=Eiter project or timeline property is not set."), result, 'critical')
+        LrDialogs.message(LOC("$$$/LRDavinci/Error/NoProjectOrTimeline=Either project or timeline property is not set."), result, 'critical')
         return
     end
     local output_path = os.tmpname()
     logger.trace("Output=" .. output_path)
     local cmd
     if ( database) then
-        cmd = '"' .. _PLUGIN.path .. '/drremote.sh' .. '"' .. ' -m settimeline -p ' .. '"' .. project .. '"' .. ' -t ' .. '"' .. timeline .. '"' .. ' -d ' .. '"' .. database ..'"' ..' -o ' .. output_path .. ' 2>/tmp/err.log'
+        cmd = '"' .. _PLUGIN.path .. '/drremote.sh' .. '"' .. ' -m settimeline -p ' .. '"' .. project .. '"' .. ' -t ' .. '"' .. timeline .. '"' .. ' -d ' .. '"' .. database ..'"' ..' -o ' .. output_path
     else
-        cmd = '"' .. _PLUGIN.path .. '/drremote.sh' .. '"' .. ' -m settimeline -p ' .. '"' .. project .. '"' .. ' -t ' .. '"' .. timeline .. '"' .. ' -o ' .. output_path .. ' 2>/tmp/err.log'
+        cmd = '"' .. _PLUGIN.path .. '/drremote.sh' .. '"' .. ' -m settimeline -p ' .. '"' .. project .. '"' .. ' -t ' .. '"' .. timeline .. '"' .. ' -o ' .. output_path
     end
     logger.trace(cmd)
     LrTasks.execute(cmd)
@@ -71,6 +67,7 @@ function TaskFunc(context)
     if ( string.starts(data, "Error")) then
         LrDialogs.message(LOC("$$$/LRDavinci/Error/EditInDavinci=Video could not be opened in Davinci Resolve."), data, 'critical')
     end
+    Progress:Done()
 end
 
 --[[---------------------------------------------------------------------------
