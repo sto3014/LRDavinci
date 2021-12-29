@@ -1,10 +1,10 @@
 return{
 
-	title = LOC "$$$/Davinci/Metadata/Tagset/Title=Custom Metadata",
+	title = LOC "$$$/LRDavinci/Metadata/Tagset/Title=Custom Metadata",
 	id = 'CustomMetadataTagset',
 	
 	items = {
-		{ 'com.adobe.label', label = LOC "$$$/Davinci/Metadata/OrigLabel=Standard Metadata" },
+		{ 'com.adobe.label', label = LOC "$$$/LRDavinci/Metadata/OrigLabel=Standard Metadata" },
 		'com.adobe.filename',
 		'com.adobe.folder',
 		
@@ -21,7 +21,7 @@ return{
 		'com.adobe.separator',
 		{
 			formatter = "com.adobe.label",
-			label = LOC "$$$/Davinci/Metadata/Tagset/Title=Davinci Resolve",
+			label = LOC "$$$/LRDavinci/Metadata/Tagset/Title=Davinci Resolve",
 		},
 
 		'at.homebrew.lrdavinci.DavinciDatabase',
@@ -33,7 +33,7 @@ return{
 		"com.adobe.separator",
 		{
 			formatter = "com.adobe.label",
-			label = LOC "$$$/Davinci/Metadata/ExifLabel=EXIF",
+			label = LOC "$$$/LRDavinci/Metadata/ExifLabel=EXIF",
 		},
 
 		"com.adobe.imageFileDimensions",		-- dimensions

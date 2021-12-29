@@ -12,7 +12,7 @@ local DavinciMetadataDefinition = {
 
         {
             id = 'DavinciProject',
-            title = LOC "$$$/Davinci/Metadata/Fields/Project=Project",
+            title = LOC "$$$/LRDavinci/Metadata/Fields/Project=Project",
             dataType = 'string', -- Specifies the data type for this field.
             browsable = true,
             searchable = true,
@@ -20,7 +20,7 @@ local DavinciMetadataDefinition = {
 
         {
             id = 'DavinciTimeline',
-            title = LOC "$$$/Davinci/Metadata/Fields/Display/Timeline=Timeline",
+            title = LOC "$$$/LRDavinci/Metadata/Fields/Display/Timeline=Timeline",
             version = 1,
             dataType = 'string',
             searchable = true,
@@ -28,7 +28,7 @@ local DavinciMetadataDefinition = {
         },
         {
             id = 'DavinciDatabase',
-            title = LOC "$$$/Davinci/Metadata/Fields/Display/Database=Database",
+            title = LOC "$$$/LRDavinci/Metadata/Fields/Display/Database=Database",
             version = 1,
             dataType = 'string',
             searchable = true,

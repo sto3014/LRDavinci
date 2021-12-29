@@ -72,11 +72,12 @@ function setProperties(data)
                 end
             end
         end
-        if (databaseOld ~= databaseNew) then
-            if (projectOld ~= projectNew) then
-                if (timelineOld ~= timelineNew) then
+        if (databaseOld ~= nil and databaseOld ~= databaseNew) then
+            if (projectOld ~= nil and projectOld ~= projectNew) then
+                if (timelineOld ~= nil and timelineOld ~= timelineNew) then
                     -- all different
-                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist3=All properties already exist and will be overwritten:^n^n^1:^n ^2^n -> ^n^3^n^n^4:^n ^5^n -> ^n^6^n^n^7:^n ^8^n -> ^n^9^n^nContinue?",
+                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist3="..
+                            "All properties already exist and will be overwritten:^n^1^n^2^n->^n^3^n^4^n^5^n->^n^6^n^7^n^8^n->^n^9^n^nContinue?",
                             "Database", databaseNew, databaseOld, "Project", projectNew, projectOld, "Timeline", timelineNew, timelineOld, result)) == "cancel") then
                         return
                     else
@@ -86,7 +87,8 @@ function setProperties(data)
                     end
                 else
                     -- database and project
-                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist2=Two properties already exist and will be overwritten:^n^n^1:^n ^2^n -> ^n^3^n^n^4:^n ^5^n -> ^n^6^n^nContinue?",
+                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist2="..
+                            "Two properties already exist and will be overwritten:^n^1^n^2^n->^n^3^n^4^n^5^n->^n^6^n^nContinue?",
                             "Database", databaseNew, databaseOld, "Project", projectNew, projectOld, result)) == "cancel") then
                         return
                     else
@@ -95,9 +97,10 @@ function setProperties(data)
                     end
                 end
             else
-                if (timelineOld ~= timelineNew) then
+                if (timelineOld ~= nil and timelineOld ~= timelineNew) then
                     -- database and timeline
-                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist2=Two properties already exist and will be overwritten:^n^n^1:^n ^2^n -> ^n^3^n^n^4:^n ^5^n -> ^n^6^n^nContinue?",
+                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist2="..
+                            "Two properties already exist and will be overwritten:^n^1^n^2^n->^n^3^n^4^n^5^n->^n^6^n^nContinue?",
                             "Database", databaseNew, databaseOld, "Timeline", timelineNew, timelineOld, result)) == "cancel") then
                         return
                     else
@@ -106,7 +109,8 @@ function setProperties(data)
                     end
                 else
                     -- database
-                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist1=One property already exists and will be overwritten:^n^n^1:^n ^2^n -> ^n^3^n^nContinue?",
+                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist1="..
+                            "One property already exists and will be overwritten:^n^1^n^2^n->^n^3^n^nContinue?",
                             "Database", databaseNew, databaseOld, result)) == "cancel") then
                         return
                     else
@@ -115,10 +119,11 @@ function setProperties(data)
                 end
             end
         else
-            if (projectOld ~= projectNew) then
-                if (timelineOld ~= timelineNew) then
+            if (projectOld ~= nil and projectOld ~= projectNew) then
+                if (timelineOld ~= nil and timelineOld ~= timelineNew) then
                     -- project and timeline
-                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist2=Two properties already exist and will be overwritten:^n^n^1:^n ^2^n -> ^n^3^n^n^4:^n ^5^n -> ^n^6^n^nContinue?",
+                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist2="..
+                            "Two properties already exist and will be overwritten:^n^1^n^2^n->^n^3^n^4^n^5^n->^n^6^n^nContinue?",
                             "Project", projectNew, projectOld, "Timeline", timelineNew, timelineOld, result)) == "cancel") then
                         return
                     else
@@ -128,7 +133,8 @@ function setProperties(data)
                     end
                 else
                     -- project
-                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist1=One property already exists and will be overwritten:^n^n^1:^n ^2^n -> ^n^3^n^nContinue?",
+                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist1="..
+                            "One property already exists and will be overwritten:^n^1^n^2^n->^n^3^n^nContinue?",
                             "Project", projectNew, projectOld, result)) == "cancel") then
                         return
                     else
@@ -136,9 +142,10 @@ function setProperties(data)
                     end
                 end
             else
-                if (timelineOld ~= timelineNew) then
+                if (timelineOld ~= nil and timelineOld ~= timelineNew) then
                     -- timeline
-                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist1=One property already exists and will be overwritten:^n^n^1:^n ^2^n -> ^n^3^n^nContinue?",
+                    if (LrDialogs.confirm(LOC("$$$/LRDavinci/Error/PropertiesExist1="..
+                            "One property already exists and will be overwritten:^n^1^n^2^n->^n^3^n^nContinue?",
                             "Timeline", timelineNew, timelineOld, result)) == "cancel") then
                         return
                     else
@@ -148,6 +155,16 @@ function setProperties(data)
                     -- all equal
                 end
             end
+        end
+        -- Now update just empty once
+        if (databaseOld == nil) then
+            logger.trace(photo:setPropertyForPlugin(_PLUGIN, "DavinciDatabase", databaseNew))
+        end
+        if (projectOld == nil) then
+            logger.trace(photo:setPropertyForPlugin(_PLUGIN, "DavinciProject", projectNew))
+        end
+        if (timelineOld == nil) then
+            logger.trace(photo:setPropertyForPlugin(_PLUGIN, "DavinciTimeline", timelineNew))
         end
     end)
 

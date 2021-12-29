@@ -4,7 +4,7 @@ return {
 	LrSdkMinimumVersion = 2.0,
 	LrToolkitIdentifier = 'at.homebrew.lrdavinci',
 
-	LrPluginName = LOC "$$$/Davinci/PluginName=Davinci Resolve",
+	LrPluginName = LOC "$$$/LRDavinci/PluginName=Davinci Resolve",
 
 	-- Add the Metadata Definition File
 	LrMetadataProvider = 'DavinciMetadataDefinition.lua',
@@ -15,12 +15,12 @@ return {
 	},
 	LrLibraryMenuItems = {
 		{
-			title = LOC "$$$/Davinci/Menu/Library/EditInDR=Edit in Davinci Resolve…",
+			title = LOC "$$$/LRDavinci/Menu/Library/EditInDR=Edit in Davinci Resolve…",
 			file = "EditInDavinciResolve.lua",
 			enabledWhen = "videosSelected",
 		},
 		{
-			title = LOC "$$$/Davinci/Menu/Library/GetID=Sync IDs from Davinci Resolve",
+			title = LOC "$$$/LRDavinci/Menu/Library/GetID=Sync IDs from Davinci Resolve",
 			file = "GetCurrentTimelineID.lua",
 			enabledWhen = "videosSelected",
 		},
