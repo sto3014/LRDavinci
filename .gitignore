@@ -3,7 +3,6 @@ luac.out
 
 # luarocks build files
 *.src.rock
-*.zip
 *.tar.gz
 
 # Object files
@@ -41,3 +40,4 @@ luac.out
 
 /.idea/
 /LRDavinci.iml
+/target/mac/
