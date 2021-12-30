@@ -186,8 +186,13 @@ function TaskFunc(context)
     logger.trace(cmd)
     LrTasks.execute(cmd)
     local data = readfile(output_path)
+    if ( data == nil or data == "") then
+        local errorFile = readfile("/tmp/drremote.err")
+        LrDialogs.message(LOC("$$$/LRDavinci/Error/GetIDsFromTimeline=Could not get IDs from current timeline."), errorFile, 'critical')
+        return
+    end
     if (stringutil.starts(data, "Error")) then
-        LrDialogs.message(LOC("$$$/LRDavinci/Error/GetIDsFromTimeline=Could not get IDs from current timeline."), 'critical')
+        LrDialogs.message(LOC("$$$/LRDavinci/Error/GetIDsFromTimeline=Could not get IDs from current timeline."), data, 'critical')
         return
     end
 

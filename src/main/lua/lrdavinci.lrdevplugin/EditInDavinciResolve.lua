@@ -14,7 +14,7 @@ function string.starts(String,Start)
     return string.sub(String,1,string.len(Start))==Start
 end
 
-local function read_file(path)
+local function readfile(path)
     logger.trace("read_file start")
     logger.trace("path=" .. path)
 
@@ -63,7 +63,15 @@ function TaskFunc(context)
     end
     logger.trace(cmd)
     LrTasks.execute(cmd)
-    local data = read_file(output_path)
+    local data = readfile(output_path)
+    logger.trace("data=" .. tostring(data))
+    if ( data == nil or data == "") then
+        logger.trace("No data file found.")
+        local errorFile = readfile("/tmp/drremote.err")
+        LrDialogs.message(LOC("$$$/LRDavinci/Error/GetIDsFromTimeline=Could not get IDs from current timeline."), errorFile, 'critical')
+        return
+    end
+
     if ( string.starts(data, "Error")) then
         LrDialogs.message(LOC("$$$/LRDavinci/Error/EditInDavinci=Video could not be opened in Davinci Resolve."), data, 'critical')
     end
