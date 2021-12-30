@@ -15,3 +15,7 @@ fi
 if [ "$2" = "gettimeline" ]; then
   /usr/local/bin/drremote $* 2>/tmp/drremote.err
 fi
+#
+if [ -f /tmp/drremote.err ]; then
+  chmod 666 /tmp/drremote.err
+fi
