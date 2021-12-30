@@ -24,10 +24,15 @@ This plug-in provides an _Edit in Davinci Resolve_ functionality for Davinci Res
 1. Download the zip archive LRDavinci-1.0.0.0.zip from 
    [GitHub](https://github.com/sto3014/LRDavinci/archive/refs/tags/1.0.0.0.zip).
 2. Extract the archive in the download folder 
-3. Go into the extracted folder and double click ```install.sh```. Install.sh extracts the plug-in into:
-  ```
-  ~/Library/Application Support/Adobe/Lightroom/Modules/LRDavinci.lrplugin
-  ```
+3. Open a terminal window, change to Downloads/LRDavinci-1.0.0.0 and execute install.sh:
+    ```
+   -> ~ cd Downloads/LRDavinci-1.0.0.0
+   -> ./install.sh 
+    ```
+    Install.sh extracts the plug-in into:
+    ```
+    ~/Library/Application Support/Adobe/Lightroom/Modules/LRDavinci.lrplugin
+    ```
 If you installed Davinci Resolve into the standard path ```/Applications``` and if you have only Python 3.6 on 
 your computer you can proceed with step 5.
 
